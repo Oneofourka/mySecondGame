@@ -1,14 +1,14 @@
 #include "Texture.h"
 
 Texture::Texture(SDL_Renderer * renderer, double x, double y) {
-	//	std::cout << "texture constructor" << this << std::endl;
+//	std::cout << "texture constructor" << this << std::endl;
 	this->renderer = renderer;
 	this->x = x;
 	this->y = y;
 }
 
 Texture::~Texture() {
-	//	std::cout << "texture destructor" << this << std::endl;
+//	std::cout << "texture destructor" << this << std::endl;
 }
 
 void Texture::setX(double x) {

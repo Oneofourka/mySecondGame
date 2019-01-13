@@ -10,7 +10,7 @@ public:
 	bool Init();
 	void Running();
 	void Render();
-	void Update(int sec);
+	void Update();
 	void Clean();
 	void NewGame();
 

@@ -1,7 +1,7 @@
 #include "Tank.h"
 
 Tank::Tank(SDL_Renderer * renderer, double x, double y) : GameTexture(renderer, x, y) {
-	//	std::cout << "tank constructor" << this << std::endl;
+//	std::cout << "tank constructor" << this << std::endl;
 	SDL_Surface* surface = IMG_Load("images/tank.png");
 	tankTexture = SDL_CreateTextureFromSurface(renderer, surface);
 	SDL_FreeSurface(surface);
@@ -9,11 +9,11 @@ Tank::Tank(SDL_Renderer * renderer, double x, double y) : GameTexture(renderer, 
 	height = TANK_HEIGHT;
 	width = TANK_WIDTH;
 	cooldown = TANK_COOLDOWN * FPS;
-	sec = 0;
+	sec = cooldown;
 }
 
 Tank::~Tank() {
-	//	std::cout << "tank destructor" << this << std::endl;
+//	std::cout << "tank destructor" << this << std::endl;
 	SDL_DestroyTexture(tankTexture);
 }
 
@@ -32,7 +32,7 @@ void Tank::Render() {
 
 void Tank::Update() {
 	++sec;
-	std::cout << sec << std::endl;
+//	std::cout << sec << std::endl;
 	Move();
 	Shote();
 //	std::cout << projectiles.size() << std::endl;
@@ -101,5 +101,8 @@ void Tank::CleanProjectile()
 {
 	for (size_t i = 0; i < projectiles.size(); ++i)
 		if (projectiles[i]->getX() <= 0 || projectiles[i]->getX() >= DISPLAY_WIDTH || projectiles[i]->getY() <= 0 || projectiles[i]->getY() >= DISPLAY_HEIGHT)
+		{
+			delete projectiles[i];
 			projectiles.erase(projectiles.begin());
+		}
 }

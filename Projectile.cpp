@@ -3,7 +3,7 @@
 using namespace std;
 
 Projectile::Projectile(SDL_Renderer * renderer, double x, double y, Turn turn) : GameTexture(renderer, x, y) {
-	//	std::cout << "projectile constructor" << this << std::endl;
+//	std::cout << "projectile constructor" << this << std::endl;
 	SDL_Surface* surface = IMG_Load("images/projectile.png");
 	projectileTexture = SDL_CreateTextureFromSurface(renderer, surface);
 	SDL_FreeSurface(surface);
@@ -15,7 +15,7 @@ Projectile::Projectile(SDL_Renderer * renderer, double x, double y, Turn turn) :
 }
 
 Projectile::~Projectile() {
-	std::cout << "projectile destructor" << this << std::endl;
+//	std::cout << "projectile destructor" << this << std::endl;
 	SDL_DestroyTexture(projectileTexture);
 }
 
@@ -40,6 +40,10 @@ void Projectile::Render() {
 }
 
 void Projectile::Update() {
+	Move();
+}
+
+void Projectile::Move() {
 	if (turn == UP)
 		y -= PROJECTILE_SPEED;
 	else if (turn == DOWN)
@@ -48,11 +52,4 @@ void Projectile::Update() {
 		x -= PROJECTILE_SPEED;
 	else
 		x += PROJECTILE_SPEED;
-
-//	if (x == 0 || x == DISPLAY_WIDTH || y == 0 || y == DISPLAY_HEIGHT)
-//		~Projectile()
-}
-
-void Projectile::Move() {
-
 }

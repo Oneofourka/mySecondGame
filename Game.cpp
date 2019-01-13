@@ -2,13 +2,13 @@
 #include <iostream>
 
 Game::Game() {
-	//	std::cout << "game constructor" << this << std::endl;
+//	std::cout << "game constructor" << this << std::endl;
 	window = nullptr;
 	renderer = nullptr;
 }
 
 Game::~Game() {
-	//	std::cout << "game destructor" << this << std::endl;
+//	std::cout << "game destructor" << this << std::endl;
 	Clean();
 }
 
@@ -52,10 +52,8 @@ void Game::Running() {
 	int frameTime;
 	
 	bool exit = true;
-	int sec = 0;
 	while(exit)
 	{
-		++sec;
 		frameStart = SDL_GetTicks();
 	
 		SDL_Event event;
@@ -69,7 +67,7 @@ void Game::Running() {
 			SDL_Delay(Uint32(frameDelay - frameTime));
 		Render();
 
-		Update(sec);
+		Update();
 	}
 }
 
@@ -79,7 +77,7 @@ void Game::Render() {
 	SDL_RenderPresent(renderer);
 }
 
-void Game::Update(int sec) {
+void Game::Update() {
 	tank->Update();
 }
 
