@@ -35,7 +35,7 @@ void Projectile::Render() {
 		angle = 180;
 	else
 		angle = 90;
-
+//	SDL_RenderCopy(renderer, projectileTexture, NULL, &dstRect);
 	SDL_RenderCopyEx(renderer, projectileTexture, 0, &dstRect, angle, NULL, SDL_FLIP_NONE);
 }
 

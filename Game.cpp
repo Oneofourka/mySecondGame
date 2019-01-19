@@ -47,6 +47,7 @@ bool Game::Init() {
 }
 
 void Game::Running() {
+	srand(time(NULL));
 	NewGame();
 	Uint32 frameStart;
 	int frameTime;
@@ -73,21 +74,39 @@ void Game::Running() {
 
 void Game::Render() {
 	SDL_RenderClear(renderer);
-	tank->Render();
+	firstPlayer->Render();
+	for (size_t i = 0; i < bots.size(); ++i)
+		bots[i]->Render();
+//	board->Render();
 	SDL_RenderPresent(renderer);
 }
 
 void Game::Update() {
-	tank->Update();
+	firstPlayer->Update();
+	for (size_t i = 0; i < bots.size(); ++i)
+		bots[i]->Update();
 }
 
 void Game::Clean() {
-	delete tank;
+	delete firstPlayer;
+	for (size_t i = 0; i < bots.size(); ++i)
+		delete bots[i];
+	bots.clear();
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
 	SDL_Quit();
 }
 
 void Game::NewGame() {
-	tank = new Tank(renderer, DISPLAY_WIDTH / 2.0 - TANK_WIDTH / 2.0, DISPLAY_HEIGHT - TANK_HEIGHT);
+	board = new Board(renderer);
+	firstPlayer = new Tiger(renderer, DISPLAY_WIDTH / 2.0 - TIGER_WIDTH / 2.0, DISPLAY_HEIGHT - TIGER_HEIGHT);
+	int x1 = 0;
+	int y1 = 0;
+	for (size_t i = 0; i < 15; ++i)
+	{
+		bots.push_back(new T34(renderer, x1, y1));
+		x1 += 2 * T34_WIDTH;
+	}
+//	std::cout << bots.size() << std::endl;
+//	bots.push_back(new T34(renderer, DISPLAY_WIDTH / 2.0 - T34_WIDTH / 2.0, DISPLAY_HEIGHT / 2.0));
 }

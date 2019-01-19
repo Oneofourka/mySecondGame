@@ -3,9 +3,9 @@
 #include <vector>
 
 enum Turn {
+	UP,
 	LEFT,
 	RIGHT,
-	UP,
 	DOWN
 };
 

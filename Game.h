@@ -1,7 +1,9 @@
 #pragma once
 #include "SDL.h"
-//#include "Texture.h"
-#include "Tank.h"
+#include "Tiger.h"
+#include "T34.h"
+#include <ctime>
+#include "Board.h"
 
 class Game {
 public:
@@ -15,7 +17,9 @@ public:
 	void NewGame();
 
 private:
-	Tank * tank;
+	std::vector <T34*> bots;
+	Tiger * firstPlayer;
+	Board * board;
 	SDL_Window * window;
 	SDL_Renderer * renderer;
 };
