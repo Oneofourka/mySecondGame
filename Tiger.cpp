@@ -32,11 +32,11 @@ void Tiger::Render() {
 
 void Tiger::Update() {
 	++sec;
-//	std::cout << sec << std::endl;
 	Move();
 	Shote();
-//	std::cout << projectiles.size() << std::endl;
-	CleanProjectile();
+	for (size_t i = 0; i < projectiles.size(); ++i)
+		if (projectiles[i]->getX() <= 0 || projectiles[i]->getX() >= DISPLAY_WIDTH || projectiles[i]->getY() <= 0 || projectiles[i]->getY() >= DISPLAY_HEIGHT)
+			CleanProjectile(i);
 }
 
 void Tiger::Move() {
@@ -97,12 +97,32 @@ void Tiger::Shote()
 		projectiles[i]->Update();
 }
 
-void Tiger::CleanProjectile()
+void Tiger::CleanProjectile(size_t i)
 {
-	for (size_t i = 0; i < projectiles.size(); ++i)
-		if (projectiles[i]->getX() <= 0 || projectiles[i]->getX() >= DISPLAY_WIDTH || projectiles[i]->getY() <= 0 || projectiles[i]->getY() >= DISPLAY_HEIGHT)
-		{
-			delete projectiles[i];
-			projectiles.erase(projectiles.begin());
-		}
+	delete projectiles[i];
+	projectiles.erase(projectiles.begin() + i);
+}
+
+double Tiger::getXProjectile(size_t i) {
+	return projectiles[i]->getX();
+}
+
+double Tiger::getYProjectile(size_t i) {
+	return projectiles[i]->getY();
+}
+
+size_t Tiger::getProjectileSize() {
+	return projectiles.size();
+}
+
+Turn Tiger::getProjectileTurn(size_t i) {
+	return projectiles[i]->GetTurn();
+}
+
+int Tiger::getProjectileWidth(size_t i) {
+	return projectiles[i]->getWidth();
+}
+
+int Tiger::getProjectileHeight(size_t i) {
+	return projectiles[i]->getHeight();
 }

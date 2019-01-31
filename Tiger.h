@@ -11,7 +11,13 @@ public:
 	void Update();
 	void Move();
 	void Shote();
-	void CleanProjectile();
+	void CleanProjectile(size_t i);
+	double getXProjectile(size_t i);
+	double getYProjectile(size_t i);
+	size_t getProjectileSize();
+	Turn getProjectileTurn(size_t i);
+	int getProjectileWidth(size_t i);
+	int getProjectileHeight(size_t i);
 
 private:
 	SDL_Texture * tigerTexture;

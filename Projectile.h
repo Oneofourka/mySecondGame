@@ -8,6 +8,8 @@ public:
 	void Render();
 	void Update();
 	void Move();
+//	int getProjectileWidth();
+//	int getProjectileHeight();
 
 private:
 	SDL_Texture * projectileTexture;

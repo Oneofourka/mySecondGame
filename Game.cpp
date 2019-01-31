@@ -77,7 +77,7 @@ void Game::Render() {
 	firstPlayer->Render();
 	for (size_t i = 0; i < bots.size(); ++i)
 		bots[i]->Render();
-//	board->Render();
+	board->Render();
 	SDL_RenderPresent(renderer);
 }
 
@@ -85,13 +85,16 @@ void Game::Update() {
 	firstPlayer->Update();
 	for (size_t i = 0; i < bots.size(); ++i)
 		bots[i]->Update();
+	BrickCollision();
 }
 
 void Game::Clean() {
-	delete firstPlayer;
 	for (size_t i = 0; i < bots.size(); ++i)
 		delete bots[i];
 	bots.clear();
+	board->Clean();
+	delete board;
+	delete firstPlayer;
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
 	SDL_Quit();
@@ -100,13 +103,45 @@ void Game::Clean() {
 void Game::NewGame() {
 	board = new Board(renderer);
 	firstPlayer = new Tiger(renderer, DISPLAY_WIDTH / 2.0 - TIGER_WIDTH / 2.0, DISPLAY_HEIGHT - TIGER_HEIGHT);
-	int x1 = 0;
-	int y1 = 0;
-	for (size_t i = 0; i < 15; ++i)
+	int x = 0;
+	for (size_t i = 0; i < 0; ++i)
 	{
-		bots.push_back(new T34(renderer, x1, y1));
-		x1 += 2 * T34_WIDTH;
+		bots.push_back(new T34(renderer, x, 0));
+		x += 2 * T34_WIDTH;
 	}
-//	std::cout << bots.size() << std::endl;
-//	bots.push_back(new T34(renderer, DISPLAY_WIDTH / 2.0 - T34_WIDTH / 2.0, DISPLAY_HEIGHT / 2.0));
+}
+
+void Game::BrickCollision() {
+	for (size_t i = 0; i < firstPlayer->getProjectileSize(); ++i){
+		for (size_t j = 0; j < board->getBrickSize(); ++j) {
+			if (firstPlayer->getProjectileTurn(i) == UP && firstPlayer->getYProjectile(i) <= board->getBrick(j)->getY() + board->getBrick(j)->getHeight() && firstPlayer->getYProjectile(i) >= board->getBrick(j)->getY()
+				&& firstPlayer->getXProjectile(i) + firstPlayer->getProjectileWidth(i) / 2.0 >= board->getBrick(j)->getX() && firstPlayer->getXProjectile(i) + firstPlayer->getProjectileWidth(i) / 2.0 <= board->getBrick(j)->getX() + board->getBrick(j)->getWidth())
+			{
+				board->DeleteBrick(j, UP_BRICK);
+				firstPlayer->CleanProjectile(i);
+				break;
+			}
+			else if (firstPlayer->getProjectileTurn(i) == LEFT && firstPlayer->getXProjectile(i) <= board->getBrick(j)->getX() + board->getBrick(j)->getWidth()
+				&& firstPlayer->getYProjectile(i) >= board->getBrick(j)->getY() && firstPlayer->getYProjectile(i) <= board->getBrick(j)->getY() + board->getBrick(j)->getHeight())
+			{
+				board->DeleteBrick(j, LEFT_BRICK);
+				firstPlayer->CleanProjectile(i);
+				break;
+			}
+			else if (firstPlayer->getProjectileTurn(i) == RIGHT && firstPlayer->getXProjectile(i) >= board->getBrick(j)->getX()
+				&& firstPlayer->getYProjectile(i) >= board->getBrick(j)->getY() && firstPlayer->getYProjectile(i) <= board->getBrick(j)->getY() + board->getBrick(j)->getHeight())
+			{
+				board->DeleteBrick(j, RIGHT_BRICK);
+				firstPlayer->CleanProjectile(i);
+				break;
+			}
+			else if (firstPlayer->getProjectileTurn(i) == DOWN && firstPlayer->getYProjectile(i) + firstPlayer->getProjectileHeight(i) >= board->getBrick(j)->getY() && firstPlayer->getYProjectile(i) <= board->getBrick(j)->getY()
+				&& firstPlayer->getXProjectile(i) + firstPlayer->getProjectileWidth(i) / 2.0 >= board->getBrick(j)->getX() && firstPlayer->getXProjectile(i) + firstPlayer->getProjectileWidth(i) / 2.0 <= board->getBrick(j)->getX() + board->getBrick(j)->getWidth())
+			{
+				board->DeleteBrick(j, DOWN_BRICK);
+				firstPlayer->CleanProjectile(i);
+				break;
+			}
+		}
+	}
 }

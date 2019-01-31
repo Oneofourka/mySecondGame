@@ -15,6 +15,7 @@ public:
 	void Update();
 	void Clean();
 	void NewGame();
+	void BrickCollision();
 
 private:
 	std::vector <T34*> bots;

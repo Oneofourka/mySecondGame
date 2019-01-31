@@ -40,7 +40,6 @@ void T34::Update() {
 
 void T34::Move() {
 	int turnRand = rand() % 4;
-//	std::cout << turnRand << std::endl;
 	if (turnRand == 1)
 		if (x <= 0)
 			x = 0;
