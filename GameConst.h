@@ -2,7 +2,7 @@
 const int DISPLAY_WIDTH = 800;
 const int DISPLAY_HEIGHT = 600;
 
-const int FPS = 60;
+const int FPS = 120;
 const double frameDelay = 1000.0 / FPS;
 
 const int BRICK_WIDTH = 32;
@@ -15,7 +15,7 @@ const double TIGER_COOLDOWN = 1;
 
 const int PROJECTILE_WIDTH = 4;
 const int PROJECTILE_HEIGHT = 16;
-const int PROJECTILE_SPEED = 1;
+const int PROJECTILE_SPEED = 6;
 
 const int T34_WIDTH = 24;
 const int T34_HEIGHT = 48;

@@ -57,7 +57,7 @@ void Tiger::Move() {
 		{
 			angle = 90;
 			turn = RIGHT;
-			x += TIGER_SPEED;
+			x += TIGER_SPEED;	
 		}
 	else if (keyboardState[SDL_SCANCODE_UP])
 		if (y <= -0.25 * TIGER_HEIGHT)
@@ -80,13 +80,13 @@ void Tiger::Move() {
 	if (keyboardState[SDL_SCANCODE_SPACE] && sec > cooldown)
 	{
 		if (turn == LEFT)
-			projectiles.push_back(new Projectile(renderer, x - 0.5 * TIGER_WIDTH - 0.5 * PROJECTILE_HEIGHT, y + 0.5 * TIGER_HEIGHT - 0.5 * PROJECTILE_HEIGHT, turn));
+			projectiles.push_back(new Projectile(renderer, x + 0.5 * PROJECTILE_HEIGHT, y + 0.5 * TIGER_HEIGHT - 0.5 * PROJECTILE_HEIGHT, turn));
 		else if (turn == RIGHT)
-			projectiles.push_back(new Projectile(renderer, x + 1.5 * TIGER_WIDTH + 0.25 * PROJECTILE_HEIGHT, y + 0.5 * TIGER_HEIGHT - 0.5 * PROJECTILE_HEIGHT, turn));
+			projectiles.push_back(new Projectile(renderer, x + TIGER_WIDTH - 0.5 * PROJECTILE_HEIGHT, y + 0.5 * TIGER_HEIGHT - 0.5 * PROJECTILE_HEIGHT, turn));
 		else if (turn == UP)
-			projectiles.push_back(new Projectile(renderer, x + 0.5 * TIGER_WIDTH - 0.5 * PROJECTILE_WIDTH, y - PROJECTILE_HEIGHT + 0.5 * PROJECTILE_WIDTH, turn));
+			projectiles.push_back(new Projectile(renderer, x + 0.5 * TIGER_WIDTH - 0.5 * PROJECTILE_WIDTH, y + 0.25 * TIGER_HEIGHT, turn));
 		else
-			projectiles.push_back(new Projectile(renderer, x + 0.5 * TIGER_WIDTH - 0.5 * PROJECTILE_WIDTH, y + TIGER_HEIGHT - 0.5 * PROJECTILE_WIDTH, turn));
+			projectiles.push_back(new Projectile(renderer, x + 0.5 * TIGER_WIDTH - 0.5 * PROJECTILE_WIDTH, y + 0.5 * TIGER_HEIGHT, turn));
 		sec = 0;
 	}
 }

@@ -1,20 +1,26 @@
 #pragma once
-#include "GameTexture.h"
 #include "Projectile.h"
-#include <vector>
 
-class Tank : public GameTexture {
+class Tank : public GameTexture{
 public:
 	Tank(SDL_Renderer * renderer, double x, double y);
-	~Tank() override;
+	~Tank();
 	void Render();
 	void Update();
 	void Move();
 	void Shote();
-	void CleanProjectile();
+	void CleanProjectile(size_t i);
+	double getXProjectile(size_t i);
+	double getYProjectile(size_t i);
+	size_t getProjectileSize();
+	Turn getProjectileTurn(size_t i);
+	int getProjectileWidth(size_t i);
+	int getProjectileHeight(size_t i);
 
-private:
+private:	
 	SDL_Texture * tankTexture;
+	SDL_Surface* surface;
+	SDL_Rect dstRect;
 	std::vector<Projectile*> projectiles;
 	Uint32 sec;
 	double cooldown;

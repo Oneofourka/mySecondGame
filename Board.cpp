@@ -51,11 +51,11 @@ Board::Board(SDL_Renderer * renderer){
 		}
 		y += BRICK_HEIGHT;
 	}
-	std::cout << "board constructor " << this << std::endl;
+//	std::cout << "board constructor " << this << std::endl;
 }
 
 Board::~Board() {
-	std::cout << "board destructor " << this << std::endl;
+//	std::cout << "board destructor " << this << std::endl;
 }
 
 void Board::Render() {
