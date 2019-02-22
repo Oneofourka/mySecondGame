@@ -1,8 +1,8 @@
 #include "Tank.h"
 
 Tank::Tank(SDL_Renderer * renderer, double x, double y) : GameTexture(renderer, x, y) {
-	SDL_Surface* surface = IMG_Load("images/tiger.png");
-	tankTexture = SDL_CreateTextureFromSurface(renderer, surface);
+	surface = IMG_Load("images/tiger.png");
+	texture = SDL_CreateTextureFromSurface(renderer, surface);
 	SDL_FreeSurface(surface);
 
 	height = TIGER_HEIGHT;
@@ -15,7 +15,7 @@ Tank::~Tank() {
 
 }
 
-void Tank::Render() {
+void Tank::Render() {	
 	dstRect.x = int(x);
 	dstRect.y = int(y);
 	dstRect.w = int(width);

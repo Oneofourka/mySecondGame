@@ -14,11 +14,8 @@ public:
 	Brick(SDL_Renderer * renderer, double x, double y, BrickType type);
 	~Brick() override;
 	void Render();
-	void Update();
 	BrickType getBrickType();
 
 private:
-	SDL_Texture * brickTexture;
 	BrickType type;
-	SDL_Surface* surface;
 };

@@ -19,14 +19,6 @@ void Texture::setY(double y) {
 	this->y = y;
 }
 
-void Texture::setWidth(int width) {
-	this->width = width;
-}
-
-void Texture::setHeight(int height) {
-	this->height = height;
-}
-
 double Texture::getX() {
 	return x;
 }

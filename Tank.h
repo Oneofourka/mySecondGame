@@ -18,9 +18,6 @@ public:
 	int getProjectileHeight(size_t i);
 
 private:	
-	SDL_Texture * tankTexture;
-	SDL_Surface* surface;
-	SDL_Rect dstRect;
 	std::vector<Projectile*> projectiles;
 	Uint32 sec;
 	double cooldown;

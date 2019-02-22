@@ -18,7 +18,6 @@ public:
 	void SetTurn(Turn turn);
 
 protected:
-	SDL_Texture * gameTexture;
 	int angle;
 	Turn turn;
 };

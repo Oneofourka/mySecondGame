@@ -10,15 +10,16 @@ public:
 	virtual ~Texture();
 	void setX(double x);
 	void setY(double y);
-	void setWidth(int i);
-	void setHeight(int i);
 	double getX();
 	double getY();
 	int getWidth();
 	int getHeight();
 
 protected:
+	SDL_Texture * texture;
 	SDL_Renderer * renderer;
+	SDL_Surface* surface;
+	SDL_Rect dstRect;
 	double x, y;
 	int width, height;
 };

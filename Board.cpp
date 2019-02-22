@@ -25,27 +25,27 @@ Board::Board(SDL_Renderer * renderer){
 		{
 			if (str[i] == '1')
 			{
-				bricksVector.push_back(new Brick(renderer, x, y, FULL_BRICK));
+				bricks.push_back(new Brick(renderer, x, y, FULL_BRICK));
 				x += BRICK_WIDTH;
 			}
 			else if (str[i] == '2')
 			{
-				bricksVector.push_back(new Brick(renderer, x, y, UP_BRICK));
+				bricks.push_back(new Brick(renderer, x, y, UP_BRICK));
 				x += BRICK_WIDTH;
 			}
 			else if (str[i] == '3')
 			{
-				bricksVector.push_back(new Brick(renderer, x, y, LEFT_BRICK));
+				bricks.push_back(new Brick(renderer, x, y, LEFT_BRICK));
 				x += BRICK_WIDTH;
 			}
 			else if (str[i] == '4')
 			{
-				bricksVector.push_back(new Brick(renderer, x, y, RIGHT_BRICK));
+				bricks.push_back(new Brick(renderer, x, y, RIGHT_BRICK));
 				x += BRICK_WIDTH;
 			}
 			else if (str[i] == '5')
 			{
-				bricksVector.push_back(new Brick(renderer, x, y, DOWN_BRICK));
+				bricks.push_back(new Brick(renderer, x, y, DOWN_BRICK));
 				x += BRICK_WIDTH;
 			}
 		}
@@ -59,42 +59,42 @@ Board::~Board() {
 }
 
 void Board::Render() {
-	for (size_t i = 0; i < bricksVector.size(); ++i)
-		bricksVector[i]->Render();
+	for (size_t i = 0; i < bricks.size(); ++i)
+		bricks[i]->Render();
 }
 
 void Board::Clean() {
-	for (size_t i = 0; i < bricksVector.size(); ++i)
-		delete bricksVector[i];
-	bricksVector.clear();
+	for (size_t i = 0; i < bricks.size(); ++i)
+		delete bricks[i];
+	bricks.clear();
 }
 
-size_t Board::getBrickSize() {
-	return bricksVector.size();
+size_t Board::getSize() {
+	return bricks.size();
 }
 
 Brick * Board::getBrick(size_t i) {
-	return bricksVector[i];
+	return bricks[i];
 }
 
-void Board::DeleteBrick(size_t i, BrickType temp) {
+void Board::DeleteBrick(size_t i, BrickType eType) {
 	if (getBrick(i)->getBrickType() == FULL_BRICK) 
 	{
 		double tempX = getBrick(i)->getX();
 		double tempY = getBrick(i)->getY();
-		delete bricksVector[i];
-		bricksVector.erase(bricksVector.begin() + i);
-		if (temp == UP_BRICK)
-			bricksVector.push_back(new Brick(renderer, tempX, tempY, UP_BRICK));
-		else if (temp == LEFT_BRICK) 
-			bricksVector.push_back(new Brick(renderer, tempX, tempY, LEFT_BRICK));
-		else if (temp == RIGHT_BRICK)
-			bricksVector.push_back(new Brick(renderer, tempX, tempY, RIGHT_BRICK));
-		else if (temp == DOWN_BRICK)
-			bricksVector.push_back(new Brick(renderer, tempX, tempY, DOWN_BRICK));
+		delete bricks[i];
+		bricks.erase(bricks.begin() + i);
+		if (eType == UP_BRICK)
+			bricks.push_back(new Brick(renderer, tempX, tempY, UP_BRICK));
+		else if (eType == LEFT_BRICK)
+			bricks.push_back(new Brick(renderer, tempX, tempY, LEFT_BRICK));
+		else if (eType == RIGHT_BRICK)
+			bricks.push_back(new Brick(renderer, tempX, tempY, RIGHT_BRICK));
+		else if (eType == DOWN_BRICK)
+			bricks.push_back(new Brick(renderer, tempX, tempY, DOWN_BRICK));
 	}
 	else {
-		delete bricksVector[i];
-		bricksVector.erase(bricksVector.begin() + i);
+		delete bricks[i];
+		bricks.erase(bricks.begin() + i);
 	}
 }

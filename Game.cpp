@@ -115,7 +115,7 @@ void Game::NewGame() {
 
 void Game::BrickCollisionProjectile() {
 	for (size_t i = 0; i < firstPlayer->getProjectileSize(); ++i){
-		for (size_t j = 0; j < board->getBrickSize(); ++j) {
+		for (size_t j = 0; j < board->getSize(); ++j) {
 			if (firstPlayer->getProjectileTurn(i) == UP && firstPlayer->getYProjectile(i) <= board->getBrick(j)->getY() + board->getBrick(j)->getHeight() && firstPlayer->getYProjectile(i) > board->getBrick(j)->getY()
 				&& firstPlayer->getXProjectile(i) + firstPlayer->getProjectileWidth(i) / 2.0 >= board->getBrick(j)->getX() && firstPlayer->getXProjectile(i) + firstPlayer->getProjectileWidth(i) / 2.0 <= board->getBrick(j)->getX() + board->getBrick(j)->getWidth())
 			{

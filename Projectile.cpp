@@ -1,11 +1,9 @@
 #include "Projectile.h"
 
-using namespace std;
-
 Projectile::Projectile(SDL_Renderer * renderer, double x, double y, Turn turn) : GameTexture(renderer, x, y) {
 //	std::cout << "projectile constructor" << this << std::endl;
-	SDL_Surface* surface = IMG_Load("images/projectile.png");
-	projectileTexture = SDL_CreateTextureFromSurface(renderer, surface);
+	surface = IMG_Load("images/projectile.png");
+	texture = SDL_CreateTextureFromSurface(renderer, surface);
 	SDL_FreeSurface(surface);
 
 	height = PROJECTILE_HEIGHT;
@@ -16,12 +14,10 @@ Projectile::Projectile(SDL_Renderer * renderer, double x, double y, Turn turn) :
 
 Projectile::~Projectile() {
 //	std::cout << "projectile destructor" << this << std::endl;
-	SDL_DestroyTexture(projectileTexture);
+	SDL_DestroyTexture(texture);
 }
 
 void Projectile::Render() {
-	SDL_Rect dstRect;
-
 	dstRect.x = int(x);
 	dstRect.y = int(y);
 	dstRect.w = int(width);
@@ -35,7 +31,7 @@ void Projectile::Render() {
 		angle = 180;
 	else
 		angle = 90;
-	SDL_RenderCopyEx(renderer, projectileTexture, 0, &dstRect, angle, NULL, SDL_FLIP_NONE);
+	SDL_RenderCopyEx(renderer, texture, 0, &dstRect, angle, NULL, SDL_FLIP_NONE);
 }
 
 void Projectile::Update() {

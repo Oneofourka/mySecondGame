@@ -34,28 +34,22 @@ Brick::Brick(SDL_Renderer * renderer, double x, double y, BrickType type) : Text
 		this->y += BRICK_HEIGHT / 2;
 //		std::cout << "brick_down constructor" << this << std::endl;
 	}
-	brickTexture = SDL_CreateTextureFromSurface(renderer, surface);
+	texture = SDL_CreateTextureFromSurface(renderer, surface);
 	SDL_FreeSurface(surface);	
 }
 
 Brick::~Brick() {
 //	std::cout << "brick destructor" << this << std::endl;
-	SDL_DestroyTexture(brickTexture);
+	SDL_DestroyTexture(texture);
 }
 
 void Brick::Render() {
-	SDL_Rect dstRect;
-
 	dstRect.x = int(x);
 	dstRect.y = int(y);
 	dstRect.w = int(width);
 	dstRect.h = int(height);
 
-	SDL_RenderCopy(renderer, brickTexture, 0, &dstRect);
-}
-
-void Brick::Update() {
-
+	SDL_RenderCopy(renderer, texture, 0, &dstRect);
 }
 
 BrickType Brick::getBrickType() {
